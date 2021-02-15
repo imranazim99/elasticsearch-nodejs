@@ -9,7 +9,7 @@ var createError = require('http-errors'),
     flash = require('express-flash'),
     passport = require("passport"),
     LocalStrategy = require("passport-local").Strategy,
-    env=require('dotenv'),
+    env=require('dotenv').config(),
     User = require("./models/ap/user"),
     Role = require("./models/ap/role"),
     fs = require('fs'),
@@ -115,7 +115,7 @@ app.use(function(req, res, next) {
 // })
 
 // set the app to listen on the port
-const port = (process.env.PORT || "9002");
+const port = (process.env.PORT);
 var server = http.listen(port, () => {
     console.log('server is running on port', server.address().port);
   });

@@ -1,8 +1,8 @@
 const Sequelize = require('sequelize');
 // DB conn. of node with mysql using sequelize
 const testQuery = {};
-const sequelize = new Sequelize('elasticdb', 'root', '', {
-    host: 'localhost',
+const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASS, {
+    host: process.env.DB_HOST,
     dialect: 'mysql',
     logging: false
   });
@@ -21,8 +21,7 @@ const sequelize = new Sequelize('elasticdb', 'root', '', {
     }, function(err) {
       console.log('An error occured while creating table: ' +err);
     });
-
-
+    
     // End of DB script
     testQuery.sequelize = sequelize;
 
