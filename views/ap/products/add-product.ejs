@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<% include ../../ap/partials/head %>
+
+<body class="hold-transition skin-blue sidebar-mini fixed">
+    <div class="wrapper">
+        <% include ../../ap/partials/header %>
+
+        <!-- Left side column. contains the logo and sidebar -->
+        <% include ../../ap/partials/left-sidebar %>
+        <!-- Loader -->
+        <div class="loading" id="loader" style="display: none">
+        </div>
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <h1>
+                    Add New Product
+                </h1>
+                <ol class="breadcrumb">
+                    <li><a href="/ap/dashboard"><i class="fa fa-dashboard"></i> Home</a></li>
+                    <li><a href="<%=baseUrl%>/list"><i class="fa fa-building"></i> Products List</a></li>
+                    <li class="active">Add New</li>
+                </ol>
+            </section>
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="row">
+                    <!-- left column -->
+                    <div class="col-md-12">
+                        <!-- success Flash Message -->
+                        <% if ( successFlash.length > 0 ) { %>
+                        <div class="alert alert-success" role="alert">
+                            <p class="text-bold">
+                                <%= successFlash %>
+                            </p>
+                        </div>
+                        <% } %>
+                        <!-- Error Flash Message -->
+                        <% if ( errorFlash.length > 0 ) { %>
+                        <div class="alert alert-danger" role="alert">
+                            <p class="text-bold">
+                                <%= errorFlash %>
+                            </p>
+                        </div>
+                        <% } %>
+
+                        <!-- Travel info -->
+                        <div class="box box-warning">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Add New Product</h3>
+                            </div>
+                            <div class="box-body">
+                                <form onsubmit="return validateForm();" id="productForm" action="<%=baseUrl%>/add" method="POST" role="form" enctype="multipart/form-data">
+                                    <!-- text input -->
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Title <sup class="fa fa-asterisk"
+                                                    style="font-size: 8px;color:red"></sup>
+                                                </label>
+                                                <input type="text" name="title" class="form-control"
+                                                    placeholder="Enter product title" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Descripition <sup class="fa fa-asterisk"
+                                                    style="font-size: 8px;color:red"></sup>
+                                                </label>
+                                                <textarea name="description" rows="4" cols="50" class="form-control" placeholder="Type description here..." required></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="text-center">
+                                        <a href="<%=baseUrl%>/list" class="btn btn-primary pull-left">Back</a>
+                                        <button type="submit" id="submit" class="btn btn-info btn-sm">Submit</button>
+                                        <button type="reset" class="btn btn-default btn-sm">Reset</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- /. Travel info -->
+                    </div>
+                </div>
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+
+    </div>
+    <!-- ./wrapper -->
+
+    <% include ../../ap/partials/footer %>
+    <% include ../../ap/partials/footer-script %>
+
+    <!-- script to show image icon -->
+    <script>
+        $(function () {
+            $(".products").addClass('active');
+            $(".add-product").addClass('active');
+        });
+    </script>
+
+    <!-- This will show places from google api -->
+    <script type="text/javascript">
+        // this will prevent form from post when enter key is pressed.
+        $(document).keypress(
+            function (event) {
+                if (event.which == '13') {
+                    event.preventDefault();
+                }
+            });
+    </script>
+    <script>
+        function validateForm() {
+            $('.loading').css('display', 'block');
+            document.getElementById("productForm").submit();
+        }
+    </script>
+</body>
+
+</html>

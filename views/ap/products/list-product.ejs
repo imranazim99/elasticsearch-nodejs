@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<% include ../../ap/partials/head %>
+
+<body class="hold-transition skin-blue sidebar-mini fixed">
+  <div class="wrapper">
+    <% include ../../ap/partials/header %>
+
+    <!-- Left side column. contains the logo and sidebar -->
+    <% include ../../ap/partials/left-sidebar %>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <h1>
+          Products List
+        </h1>
+        <ol class="breadcrumb">
+          <li><a href="/ap/dashboard"><i class="fa fa-dashboard"></i> Dashbaord</a></li>
+          <li class="active">Product List</li>
+        </ol>
+      </section>
+
+      <!-- Main content -->
+      <section class="content">
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-12">
+                <!-- search form -->
+                <form action="#" method="get" class="sidebar-form">
+                    <div class="input-group">
+                    <input type="text" name="q" class="form-control" placeholder="Search by keyword, title OR descripition..." autocomplete="off">
+                    <span class="input-group-btn">
+                            <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+                            <i class="fa fa-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+                <!-- /.search form -->
+
+                <!-- success Flash Message -->
+                <% if ( successFlash.length > 0 ) { %>
+                <div class="alert alert-success" role="alert">
+                    <p class="text-bold">
+                        <%= successFlash %>
+                    </p>
+                </div>
+                <% } %>
+                <!-- Error Flash Message -->
+                <% if ( errorFlash.length > 0 ) { %>
+                <div class="alert alert-danger" role="alert">
+                    <p class="text-bold">
+                        <%= errorFlash %>
+                    </p>
+                </div>
+                <% } %>
+
+                <!-- Travel info -->
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">List of all Products</h3>
+                    </div>
+                    <div class="box-body">
+                        <table id="table1" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th style="width: 6%;">Sr #</th>
+                                    <th style="width: 15%;">Title</th>
+                                    <th>Descripition</th>
+                                    <th class="text-center" style="width: 10%;">Added At</th>
+                                    <th class="text-center" style="width: 10%;">Action</th>
+                                </tr>
+                            </thead>
+                            <% if(locals.products) { %>
+                            <tbody>
+                                <% var sr = 1; products.forEach((item) => { %>
+                                <tr id="<%= item.id %>">
+                                    <td>
+                                        <%= sr %>
+                                    </td>
+                                    <td>
+                                        <%= item.title %>
+                                    </td>
+                                    <td>
+                                        <span id="lessId<%=item.id%>">
+                                            <%= item.description.substring(0,90) %> ...
+                                            
+                                        </span>
+                                        <% if(item.description.length > 90){ %>
+                                            <span id="showId<%=item.id%>">
+                                                <a href="#" onclick="toggleText('<%=item.id%>');">Show More</a>
+                                            </span>
+                                        <% } %>
+                                    </td>
+                                    <td class="text-center">
+                                        <%= item.createdAt.toLocaleString('en-US',{day: 'numeric', month: 'short', year: 'numeric'}) %>
+                                    </td>
+                                    <td class="text-center">
+                                        <a href="<%=baseUrl%>/view" class="btn btn-info btn-xs" title="View Detail">
+                                            <span class="fa fa-eye"></span>
+                                        </a>
+                                        <a href="<%=baseUrl%>/edit/<%=item.id%>" class="btn btn-info btn-xs" title="Edit">
+                                            <span class="fa fa-edit"></span>
+                                        </a>
+                                        <a href="<%=baseUrl%>/delete/<%=item.id%>" class="btn btn-danger btn-xs" title="Delete" onclick="return confirm('Are you sure to delete?');">
+                                            <span class="fa fa-trash"></span>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <% sr++; }); %>
+                            </tbody>
+                            <% } %>
+                        </table>
+                    </div>
+                </div>
+                <!-- /. Travel info -->
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+  </div>
+  <!-- ./wrapper -->
+
+  <% include ../../ap/partials/footer %>
+  <% include ../../ap/partials/footer-script %>
+  <script src="/ap/dist/js/highchart.js"></script>
+  <script>
+    $(".products").addClass('active');
+    $(".list-product").addClass('active');
+    // window.setTimeout(function () {
+    //   $(".alert").fadeTo(300, 0).slideUp(300, function () {
+    //     $(this).remove();
+    //   });
+    // }, 3000);
+    $('#table1').DataTable({
+            'paging'      : true,
+            'lengthChange': true,
+            'searching'   : true,
+            'ordering'    : true,
+            'info'        : true,
+            'autoWidth'   : false
+        })
+  </script>
+</body>
+
+</html>

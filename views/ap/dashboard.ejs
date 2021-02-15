@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<% include ../ap/partials/head %>
+
+<body class="hold-transition skin-blue sidebar-mini fixed">
+  <div class="wrapper">
+    <% include ../ap/partials/header %>
+
+    <!-- Left side column. contains the logo and sidebar -->
+    <% include ../ap/partials/left-sidebar %>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <h1>
+          Control Panel
+          <small>MIS</small>
+        </h1>
+        <ol class="breadcrumb">
+          <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+          <li class="active">Dashboard</li>
+        </ol>
+      </section>
+
+      <!-- Main content -->
+      <section class="content">
+        <!-- Info boxes -->
+        <div class="row">
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="info-box">
+              <a href="/ap/product/list">
+                <span class="info-box-icon bg-aqua"><i class="fa fa-plane"></i></span>
+                <div class="info-box-content">
+                  <span class="info-box-text">Products</span>
+                  <% if(locals.products){ %>
+                  <span class="info-box-number">
+                    <%=products%></span>
+                  <% } %>
+                </div>
+              </a>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+
+          <!-- fix for small devices only -->
+          <div class="clearfix visible-sm-block"></div>
+
+        </div>
+        <!-- /.row -->
+
+        <!-- Info boxes -->
+        <div class="row">
+          <div class="col-md-12">
+            <!-- Bar chart -->
+            <div class="box box-info">
+              <div class="box-header with-border">
+                <i class="fa fa-plane"></i>
+
+                <h3 class="box-title">Products</h3>
+
+                <div class="box-tools pull-right">
+                  <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                </div>
+              </div>
+              <div class="box-body">
+                <div id="product-chart" style="height: 300px;"></div>
+              </div>
+              <!-- /.box-body-->
+            </div>
+            <!-- /.box -->
+          </div>
+          <!-- Donut chart -->
+        </div>
+      </section>
+      <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+  </div>
+  <!-- ./wrapper -->
+
+  <% include ../ap/partials/footer %>
+  <% include ../ap/partials/footer-script %>
+  <script src="/ap/dist/js/highchart.js"></script>
+  <script>
+    $(function () {
+        $(".home").addClass('active');
+        Highcharts.chart('product-chart', {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Products'
+            },
+            subtitle: {
+                text: 'For the year: ' + new Date().getFullYear()
+            },
+            xAxis: {
+                categories: [
+                    'Jan',
+                    'Feb',
+                    'Mar',
+                    'Apr',
+                    'May',
+                    'Jun',
+                    'Jul',
+                    'Aug',
+                    'Sep',
+                    'Oct',
+                    'Nov',
+                    'Dec'
+                ],
+                crosshair: true
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'No. of Products'
+                }
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.f}</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+            series: [{
+                name: 'Products',
+                data: [3,0,0,0,0,0,0],
+                color: 'skyblue'
+
+            }]
+        });
+    });
+    window.setTimeout(function () {
+      $(".alert").fadeTo(300, 0).slideUp(300, function () {
+        $(this).remove();
+      });
+    }, 3000);
+    // automated called functions
+    // window.onload = function () {
+    //   agencyChart();
+    //   agentChart();
+    // };
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,37 @@
+{
+  "name": "pharmacy.com",
+  "version": "1.0.0",
+  "description": "This is Elastic Search Appliction",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Imran Azim",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "dotenv": "^8.0.0",
+    "ejs": "^2.6.2",
+    "elasticsearch": "^16.7.2",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.1.5",
+    "express-flash": "0.0.2",
+    "express-session": "^1.16.2",
+    "fs": "0.0.1-security",
+    "geodist": "^0.2.1",
+    "http": "0.0.0",
+    "morgan": "^1.10.0",
+    "mysql2": "^2.2.5",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "path": "^0.12.7",
+    "request": "^2.88.0",
+    "sequelize": "^6.3.5",
+    "shortid": "^2.2.15",
+    "socket.io": "^2.2.0",
+    "stripe": "^7.13.0",
+    "unirest": "^0.6.0"
+  }
+}

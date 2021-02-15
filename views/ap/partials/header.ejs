@@ -1,0 +1,66 @@
+<header class="main-header">
+
+        <!-- Logo -->
+        <a href="/" class="logo">
+          <!-- mini logo for sidebar mini 50x50 pixels -->
+          <span class="logo-mini"><b>ACP</b></span>
+          <!-- logo for regular state and mobile devices -->
+          <span class="logo-lg"><b>Admin Control </b>Panel</span>
+        </a>
+    
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top">
+          <!-- Sidebar toggle button-->
+          <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+            <span class="sr-only">Toggle navigation</span>
+          </a>
+          <!-- Navbar Right Menu -->
+          <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+              <!-- User Account: style can be found in dropdown.less -->
+              <li class="dropdown user user-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <% if(currentUser.image != "" && currentUser.image != undefined){%>
+                  <img src="<%=currentUser.image%>" class="user-image" alt="User Image">
+                  <% } else { %>
+                    <img src="" class="user-image" alt="Image not available">
+                  <% } %>
+                  <span class="hidden-xs"><%=currentUser.name%></span><i class="fa fa-angle-down pull-right"></i>
+                </a>
+                <ul class="dropdown-menu">
+                  <!-- User image -->
+                  <li class="user-header">
+                    <% if(currentUser.image != "" && currentUser.image != undefined){ %>
+                        <img src="<%=currentUser.image%>" class="img-circle" alt="User Image">
+                      <% } else { %>
+                        <img src="" class="img-circle" alt="Image not available">
+                    <% } %>
+                    <p>
+                      <%=currentUser.name%> - Admin
+                      <small>Member since <%=currentUser.createdAt.toLocaleString('en-Us',{day:"numeric",month:"short",year:"numeric"})%></small>
+                    </p>
+                  </li>
+                  <!-- Menu Body -->
+                  <li class="user-body">
+                    <div class="row">
+                      <div class="text-center">
+                        <a href="#">Administrator</a>
+                      </div>
+                    </div>
+                    <!-- /.row -->
+                  </li>
+                  <!-- Menu Footer-->
+                  <li class="user-footer">
+                    <div class="pull-left">
+                      <a href="#" class="btn btn-default btn-flat">Profile</a>
+                    </div>
+                    <div class="pull-right">
+                      <a href="/ap/auth/logout" class="btn btn-default btn-flat">Sign out</a>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
